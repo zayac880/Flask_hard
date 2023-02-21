@@ -30,7 +30,7 @@ class MoviesView(Resource):
         return "", 201
 
 
-@movies_ns.route('/<int>:mid>')
+@movies_ns.route('/<int:mid>')
 class MovieView(Resource):
     def get(self, mid):
         movie = movie_service.get_one(mid)

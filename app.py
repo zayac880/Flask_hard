@@ -11,7 +11,7 @@ from setup_db import db
 from views.movies import movies_ns
 from views.genres import genre_ns
 from views.directors import director_ns
-
+from create_data import data_to_db
 
 
 # функция создания основного объекта app
@@ -34,8 +34,9 @@ def register_extensions(app):
 
 def create_data(app, db):
     with app.app_context():
+        db.drop_all()
         db.create_all()
-
+        data_to_db()
         # with db.session.begin():
         #    db.session.add_all()
 
@@ -44,4 +45,4 @@ app = create_app(Config())
 app.debug = True
 
 if __name__ == '__main__':
-    app.run(host="localhost", port=10001, debug=True)
+    app.run(host="localhost", debug=True, port=5000)
